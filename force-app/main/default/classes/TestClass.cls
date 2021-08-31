@@ -1,7 +1,6 @@
-public with sharing class TestClass {
-    public TestClass() {
+public with sharing class TestClass{
+	public TestClass(){
 
-
-        System.debug('This is a Test Class');
-    }
+		System.debug('This is a Test Class');
+	}
 }
