@@ -1,0 +1,19 @@
+{
+    "orgName": "My Demo Org",
+    "edition": "Developer",
+    "features": ["EnableSetPasswordInApi", "API", "ProcessBuilder","DefaultWorkflowUser","Chatbot", "Communities"],
+    "settings": {
+      "lightningExperienceSettings": {
+        "enableS1DesktopEnabled": true
+      },
+      "mobileSettings": {
+        "enableS1EncryptedStoragePref2": false
+      },
+      "communitiesSettings": {
+        "enableCommunityWorkspaces" : true,
+        "enableNetworksEnabled" : true
+
+      }    
+    }
+  }
+  
