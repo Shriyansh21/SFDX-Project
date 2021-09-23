@@ -36,5 +36,13 @@
 		<members>*</members>
 		<name>StaticResource</name>
 	</types>
+	<types>
+	<members>unflied$public<members>
+	<name>Report</name>
+	</types>
+	<types>
+	<members>*<members>
+	<name>ReportType</name>
+	</types>
 	<version>51.0</version>
 </Package>
