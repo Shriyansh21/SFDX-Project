@@ -3,6 +3,9 @@
     "edition": "Developer",
     "features": ["EnableSetPasswordInApi", "API", "RecordTypes", "ProcessBuilder","DefaultWorkflowUser", "Communities","PersonAccounts"],
     "settings": {
+      "surveySettings": {
+        "enableSurvey" : true
+      },
       "lightningExperienceSettings": {
         "enableS1DesktopEnabled": true
       },
@@ -13,6 +16,9 @@
         "enableCommunityWorkspaces" : true,
         "enableNetworksEnabled" : true
 
+      },
+      "botsSettings" : {
+        "enableBots" : true
       }    
     }
   }

@@ -39,5 +39,8 @@
     "**/{aura|lwc}/**": [
       "eslint"
     ]
+  },
+  "dependencies": {
+    "sfdx-git-delta": "^4.9.0"
   }
 }
