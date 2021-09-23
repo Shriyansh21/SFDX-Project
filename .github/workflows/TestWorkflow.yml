@@ -16,7 +16,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  validate:
     # The type of runner that the job will run on
     runs-on: windows-latest
 
@@ -26,10 +26,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
-      # Install Salesforce CLI
-      - name: Install Salesforce CLI 
-        run: npm install sfdx-cli
-             node_modules/sfdx-cli/bin/run version
+      # # Install Salesforce CLI
+      # - name: Install Salesforce CLI 
+      #   run: npm install sfdx-cli
+      #        node_modules/sfdx-cli/bin/run version
         
       # Auth to the target org
       - uses: sfdx-actions/setup-sfdx@v1 
