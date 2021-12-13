@@ -1,12 +1,15 @@
-# This is a basic workflow to help you get started with Actions
+# This is a basic workflow for deploying to sandbox QA, 
+#  from Dev (the main development trunk)
 
-name: My-Test-Workflow
+name: Dev-autodeploy-Org
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push events but only for the master branch
+  # Triggers the workflow on push to deploy to QA sandbox
+  # see the Confluence page 
+  # https://bainco.atlassian.net/wiki/spaces/GLO/pages/16258269298/A+Starter+Workflow+for+QA+Deployment
   push:
-    branches: [ master ]
+    branches: [ 'master' ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -14,28 +17,30 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  validate:
+  build:
     # The type of runner that the job will run on
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
-      # # Install Salesforce CLI
-      # - name: Install Salesforce CLI 
-      #   run: npm install sfdx-cli
-      #        node_modules/sfdx-cli/bin/run version
-        
-      # Auth to the target org
-      - uses: sfdx-actions/setup-sfdx@v1 
+
+      # Install Salesforce CLI
+      - name: Install Salesforce CLI
+        run: |
+            wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
+            mkdir sfdx-cli
+            tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1
+            ./sfdx-cli/install
+      # auth to the target org (will change later)      
+      - uses: sfdx-actions/setup-sfdx@v1
         with:
-         sfdx-auth-url: ${{secrets.DEVHUB_AUTH_URL}}
-         
-      # Validation Deployment to the org from master branch  
-      - name: Validation Deployment
-        run: sfdx:force:source:deploy -c -p force-app/ -l RunLocalTests
+          sfdx-auth-url: ${{ secrets.DEVHUB_AUTH_URL}}
+      # deploy first (may combine with running tests in the future).  some excluded files will be deleted first
+      - name: deploy branch
+        run: sfdx force:source:deploy -p force-app/
+      # run Apex tests
+      - name: run Apex tests 
+        run: sfdx force:apex:test:run -l RunLocalTests -w 30
         
-     
