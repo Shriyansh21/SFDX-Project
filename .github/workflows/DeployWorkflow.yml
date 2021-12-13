@@ -1,13 +1,11 @@
-# This is a basic workflow for deploying to sandbox QA, 
-#  from Dev (the main development trunk)
+# This is a basic workflow for deploying to DevHub Org, 
+#  from master (the main development trunk)
 
 name: Dev-autodeploy-Org
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push to deploy to QA sandbox
-  # see the Confluence page 
-  # https://bainco.atlassian.net/wiki/spaces/GLO/pages/16258269298/A+Starter+Workflow+for+QA+Deployment
+  # Triggers the workflow on push to deploy to DevHub Org
   push:
     branches: [ 'master' ]
 
