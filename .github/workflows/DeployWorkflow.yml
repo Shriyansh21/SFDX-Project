@@ -40,7 +40,3 @@ jobs:
       # deploy first (may combine with running tests in the future).  some excluded files will be deleted first
       - name: deploy branch
         run: sfdx force:source:deploy -p force-app/
-      # run Apex tests
-      - name: run Apex tests 
-        run: sfdx force:apex:test:run -l RunLocalTests -w 30
-        
