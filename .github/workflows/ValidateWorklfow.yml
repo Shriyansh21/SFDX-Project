@@ -1,0 +1,40 @@
+# This is a basic workflow for deploying to DevHub Org, 
+#  from master (the main development trunk)
+
+name: Dev-autovaliate-Org
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push to deploy to DevHub Org
+  pull_request:
+    branches: [ 'master' ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  validate:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Install Salesforce CLI
+      - name: Install Salesforce CLI
+        run: |
+            wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
+            mkdir sfdx-cli
+            tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1
+            ./sfdx-cli/install
+      # auth to the target org (will change later)      
+      - uses: sfdx-actions/setup-sfdx@v1
+        with:
+          sfdx-auth-url: ${{ secrets.DEVHUB_AUTH_URL}}
+      # deploy first (may combine with running tests in the future).  some excluded files will be deleted first
+      - name: deploy branch
+        run: sfdx force:source:deploy -c -p force-app/
