@@ -5,5 +5,6 @@ public with sharing class NewTestClass {
 with the Patch branch and merge it with the Master branch then deploy this to
 org. */
 System.debug('This is a new test class');
+System.debug('This is a new test class');
     }
 }
